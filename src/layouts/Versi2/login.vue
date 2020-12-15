@@ -173,7 +173,7 @@
 		data () {
 			return {
 				logos: Object.keys(logoData),
-				logo: 'WilEdi', // Keytronic, Digitalizer, Molectron, WilEdi
+				logo: 'Keytronic', // Keytronic, Digitalizer, Molectron, WilEdi
 				login: {
 					COMP: '',
 					USER: '',

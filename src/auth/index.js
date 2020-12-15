@@ -164,7 +164,7 @@ import { date } from 'quasar'
 						}
 					).catch(
 						function (error) {
-							form.$q.notify('disini' + error );
+							form.$q.notify('auth login ' + error );
 						}
 					);					
 				}

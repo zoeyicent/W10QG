@@ -69,7 +69,7 @@ export async function doAppCheckLogin ({commit, state}) {
         var params = new Object;
             params['Controller'] = 'cAUTH'; 
             params['Method'] = 'CheckLogin'; 
-
+        
         const Hasil = await weApi.fnRequestData (params, '');
         // console.log('actions.doAppCheckLogin',Hasil)
         if (Hasil.success) {

@@ -73,13 +73,19 @@ export default {
 	},
 
 	async fnLoginData (DataParms, UserName) {
+		// console.log('api.fnLoginData', DataParms);
+		// var params = DataParms; 
 		var params = this.fnEncryptParam(DataParms); 
         var Address = process.env.API + 'login';
 		try {
-			const response = await axios.get(Address, { params: params, withCredentials: true } );
-			// console.log('api.fnLoginData', response.data);
+			const response = await axios.post(Address, { params: params, withCredentials: true,} );
+			// console.log('api.fnLoginData 1111 ', response);
 			return response.data;
 		} catch (error) {
+			if (error.response.data != undefined) {
+				throw error.response.data;
+			}
+			// console.log('api.fnLoginData error -> ', error.response.aaa);	
 			throw error;
 		}
 	},
@@ -109,7 +115,8 @@ ada di masing masing module yang memanggil fnRequestData
         	// console.log('api.fnRequestData', this.fnDecrypt(response.data));		
 			return this.fnDecrypt(response.data, '');
 		} catch (error) {
-			console.log('api.fnRequestData error', response.data);	
+			console.log('api.fnRequestData error');	
+			// return '';
 			throw error;
 		}
 	},

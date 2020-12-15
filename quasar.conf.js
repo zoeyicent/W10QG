@@ -30,7 +30,7 @@ module.exports = function (ctx) {
       publicPath: '',
       env: ctx.dev
         ? { // so on dev we'll have
-          API: JSON.stringify('http://localhost:9991/api/')
+          API: JSON.stringify('http://localhost:9991/')
           // API: JSON.stringify('http://localhost:8099/Project01/L01/api/')
           // API: JSON.stringify('http://172.30.9.32:8099/a5framework/lar/api/')
           // API: JSON.stringify('http://laravel.wexits.com/project01/public/index.php/api/')
@@ -47,6 +47,7 @@ module.exports = function (ctx) {
     devServer: {
       // https: true,
       // port: 8080,
+      // proxy: 'http://localhost:9991/',
       open: true // opens browser window automatically
     },
     framework: 'all', // --- includes everything; for dev only!
