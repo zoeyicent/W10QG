@@ -9,12 +9,12 @@ export default {
 
 	fnEncrypt: function (Data, UserName) {
 		/*
-			Encrypt data json harus sama dengan fnSoftWE.php
-			Untuk ke laravel (cWeRouter.php)
-			Note : Hasil Encrypt harus sama di file cWeRouter.php
+			Encrypt data json harus sama dengan soFN.php
+			Untuk ke laravel (cSORouter.php)
+			Note : Hasil Encrypt harus sama di file cSORouter.php
 		*/		
 		var DataEncrypt = Data;
-		    DataEncrypt = btoa("WilEdi2019") + Data;
+		    DataEncrypt = btoa("Aliang2020") + Data;
 		// console.log(DataEncrypt);	
 		    DataEncrypt = btoa(DataEncrypt);
 		// console.log(DataEncrypt);	
@@ -37,9 +37,9 @@ export default {
 
 	fnDecrypt: function (Data, UserName) {		
 		/*
-			Decrypt data json harus sama dengan fnSoftWE.php
-			Dari laravel (cWeRouter.php)
-			Note : Hasil Decrypt harus sama di file cWeRouter.php
+			Decrypt data json harus sama dengan soFN.php
+			Dari laravel (cSORouter.php)
+			Note : Hasil Decrypt harus sama di file cSORouter.php
 		*/	
 		var DataDecrypt = Data;
 		var D = DataDecrypt.split('');
@@ -59,7 +59,7 @@ export default {
     		DataDecrypt = D1.join('') + D2.join('');
     		DataDecrypt = DataDecrypt.split('').reverse().join('');	
 		    DataDecrypt = atob(DataDecrypt);
-		var Keys = btoa("WilEdi2019");		    
+		var Keys = btoa("Aliang2020");		    
 		    DataDecrypt = DataDecrypt.replace(Keys, "");
 			// console.log('DataDecrypt Reverse',DataDecrypt);
 		return JSON.parse(DataDecrypt);
@@ -79,6 +79,7 @@ export default {
         var Address = process.env.API + 'login';
 		try {
 			const response = await axios.post(Address, { params: params, withCredentials: true,} );
+			// const response = await axios.get(Address, { params: params, withCredentials: false,} );
 			// console.log('api.fnLoginData 1111 ', response);
 			return response.data;
 		} catch (error) {
@@ -107,15 +108,21 @@ ada di masing masing module yang memanggil fnRequestData
  		// console.log('api.fnRequestData - DataParms', DataParms);
 
 		var params = this.fnEncryptParam(DataParms); 
+		// var params = DataParms; 
+			params['token'] = localStorage.getItem(AppName+'-token')
         var Address = process.env.API + 'getData';
 
 		try {
         	// console.log('api.fnRequestData - params', params);		
-			const response = await axios.get(Address, { params: params, withCredentials: true } )	
+			const response = await axios.get(Address, { params: params} )	
+        	// console.log('api.fnRequestData', response.data);	
         	// console.log('api.fnRequestData', this.fnDecrypt(response.data));		
 			return this.fnDecrypt(response.data, '');
 		} catch (error) {
-			console.log('api.fnRequestData error');	
+			console.log('api.fnRequestData error', error);	
+			if (error.response.data != undefined) {
+				throw error.response.data;
+			}
 			// return '';
 			throw error;
 		}
