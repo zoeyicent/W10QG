@@ -80,7 +80,7 @@ export default {
 		try {
 			const response = await axios.post(Address, { params: params, withCredentials: true,} );
 			// const response = await axios.get(Address, { params: params, withCredentials: false,} );
-			// console.log('api.fnLoginData 1111 ', response);
+			// console.log('api.fnLoginData 123 ', response);
 			return response.data;
 		} catch (error) {
 			if (error.response.data != undefined) {
@@ -109,7 +109,7 @@ ada di masing masing module yang memanggil fnRequestData
 
 		var params = this.fnEncryptParam(DataParms); 
 		// var params = DataParms; 
-			params['token'] = localStorage.getItem(AppName+'-token')
+			params['token'] = localStorage.getItem(AppName+'-token');
         var Address = process.env.API + 'getData';
 
 		try {
@@ -119,8 +119,11 @@ ada di masing masing module yang memanggil fnRequestData
         	// console.log('api.fnRequestData', this.fnDecrypt(response.data));		
 			return this.fnDecrypt(response.data, '');
 		} catch (error) {
-			console.log('api.fnRequestData error', error);	
+			console.log('api.fnRequestData error', error.response);	
 			if (error.response.data != undefined) {
+				if ((error.response.status == 401) && (error.response.data == 'Unauthorized.') ) {
+					localStorage.clear();
+				}
 				throw error.response.data;
 			}
 			// return '';
@@ -142,6 +145,7 @@ ada di masing masing module yang memanggil fnPostData
 		DataParms['AppName'] = AppName;
 		
         var params = this.fnEncryptParam(DataParms); 
+			params['token'] = localStorage.getItem(AppName+'-token');
         var Address = process.env.API + 'postData';
 
 		try {
@@ -149,6 +153,13 @@ ada di masing masing module yang memanggil fnPostData
 			// const response = await axios.get(Address, { params: params } )
 			return this.fnDecrypt(response.data, '');
 		} catch (error) {
+			if (error.response.data != undefined) {
+				if ((error.response.status == 401) && (error.response.data == 'Unauthorized.') ) {
+					localStorage.clear();
+				}
+				throw error.response.data;
+			}
+			// return '';
 			throw error;
 			// return {data: {sukses: false, title: 'Fail', message: 'fnPostData Fail ' + error}}
 		}

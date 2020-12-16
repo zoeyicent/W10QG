@@ -211,7 +211,7 @@
 				this.ListMenuSelected = null
 			},
 			BtnLogOff() {
-				weAuth.logout();
+				weAuth.logout(this);
 			}
 		},			
 		data () {

@@ -76,6 +76,9 @@ export async function doAppCheckLogin ({commit, state}) {
         	flag = Hasil.success;
         	message = 'You are still login now';
         	userName = localStorage.getItem(AppName+'-name');
+            if(Hasil.token!='') {
+                localStorage.setItem(AppName+'-token',Hasil.token);
+            }
         } else {  
         	flag = false; userName = '';
             message = 'Check Login Fail!!!';   
@@ -104,8 +107,16 @@ export async function doAppLogout ({commit, state}) {
 
     localStorage.removeItem(AppName+'-company');
     localStorage.removeItem(AppName+'-name');
-    localStorage.removeItem(AppName+'-token');
     localStorage.removeItem(AppName+'-dateInfo');
+
+    var params = new Object;
+        params['Controller'] = 'cAUTH'; 
+        params['Method'] = 'Logout'; 
+    
+    const Hasil = await weApi.fnRequestData (params, '');
+    // console.log('action doAppLogout', Hasil);
+
+    localStorage.removeItem(AppName+'-token');
 
     commit('setAppDefault', {});
 

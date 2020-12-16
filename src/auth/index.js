@@ -192,11 +192,12 @@ import { date } from 'quasar'
 
 		},
 
-		logout() {
+		logout(form) {
 			// alert('logout');
 			store.dispatch('App/doAppLogout');
 			router.push({name : 'login'});		
 			router.go();		
+			form.$q.notify('logout successfully');
 		},
 
 
@@ -231,7 +232,7 @@ import { date } from 'quasar'
 						}
 					).catch(
 						function (error) {
-							form.$q.notify('error route' + error );
+							form.$q.notify('error router ' + error );
 						}
 					);	
 
