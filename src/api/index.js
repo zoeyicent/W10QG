@@ -145,11 +145,12 @@ ada di masing masing module yang memanggil fnPostData
 		DataParms['AppName'] = AppName;
 		
         var params = this.fnEncryptParam(DataParms); 
-			params['token'] = localStorage.getItem(AppName+'-token');
         var Address = process.env.API + 'postData';
 
 		try {
-			const response = await axios.post(Address, { params: params, withCredentials: true } )
+			const response = await axios.post(Address, { params: params, 
+														 token: localStorage.getItem(AppName+'-token'),
+														 withCredentials: true } )
 			// const response = await axios.get(Address, { params: params } )
 			return this.fnDecrypt(response.data, '');
 		} catch (error) {
