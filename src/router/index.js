@@ -48,6 +48,10 @@ Router.beforeEach((to, from, next) => {
 
     var AppName = store.state.App.AppName + '-name';
     switch(to.name) {
+        case 'subError401':
+        case 'error401':
+          next();
+          break;
         case 'report':
           next();
           break;
@@ -73,9 +77,7 @@ Router.beforeEach((to, from, next) => {
             return;
             break;
         default:
-            // console.log('DONE')
-            // console.log('=============================')     
-
+            // console.log('Masuk Router');
             store.dispatch('App/doAppCheckLogin').then(
               function() {
 
@@ -98,7 +100,17 @@ Router.beforeEach((to, from, next) => {
                 }  
 
               }
-            )
+            ).catch(
+              function (error) {
+                console.log('router xxxxx',error);       
+                // ini hanya berlaku, saat buka menu (Alias router dipanggil)       
+                if (error == 'Unauthorized.') {
+                    throw error;
+                    next({name: 'subError401'});
+                }
+                return;
+              }
+            );
 
             break;
     }

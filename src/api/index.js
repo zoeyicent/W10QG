@@ -2,6 +2,7 @@
 import axios from 'axios';
 import Vue from 'vue';
 import store from 'src/store'
+import router from 'src/router'
 
 // import vue from 'vue';
 export default { 
@@ -119,10 +120,11 @@ ada di masing masing module yang memanggil fnRequestData
         	// console.log('api.fnRequestData', this.fnDecrypt(response.data));		
 			return this.fnDecrypt(response.data, '');
 		} catch (error) {
-			console.log('api.fnRequestData error', error.response);	
+			// console.log('api.fnRequestData error', error.response);	
 			if (error.response.data != undefined) {
 				if ((error.response.status == 401) && (error.response.data == 'Unauthorized.') ) {
-					localStorage.clear();
+					localStorage.clear();	
+					router.push({name : 'subError401'});				
 				}
 				throw error.response.data;
 			}
@@ -157,6 +159,7 @@ ada di masing masing module yang memanggil fnPostData
 			if (error.response.data != undefined) {
 				if ((error.response.status == 401) && (error.response.data == 'Unauthorized.') ) {
 					localStorage.clear();
+					router.push({name : 'subError401'});
 				}
 				throw error.response.data;
 			}

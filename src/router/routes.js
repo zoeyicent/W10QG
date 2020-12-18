@@ -15,6 +15,7 @@ const routes = [
     path: '/', component: () => import('layouts/' + Versi + '/MainMenu'), 
     children: [
         { path: '/', name : 'mainMenu', component: () => import('pages/HomePage') },
+        { path: '/subError401', name : 'subError401', component: () => import('pages/Error401') },
         // { path: '/homePage', name : 'homePage', component: () => import('pages/HomePage') },
         // { path: '*', component: () => import('pages/404')  }
     ]
@@ -25,6 +26,9 @@ const routes = [
   { 
     path: '/report', name : 'report', component: () => import('layouts/' + Versi + '/report') 
   },
+  { 
+    path: '/error401', name : 'error401', component: () => import('pages/Error401') 
+  }, // Always leave this as last one
   { 
     path: '*', component: () => import('pages/Error505') 
   }, // Always leave this as last one
