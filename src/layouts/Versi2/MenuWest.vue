@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="bg-secondary" >
+		<div class="bg-tertiary" >
 			<q-item>  <!-- class="bg-secondary" -->
 				<q-item-side :avatar="profilePic" />
 				<q-item-main>

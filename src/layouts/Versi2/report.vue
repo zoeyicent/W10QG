@@ -16,7 +16,10 @@
     	// console.log('masuk sini', this.$route.query.data);
     	// this.queryData = "http://localhost:9991/api/printData?Data=" + this.$route.query.data;
     	// console.log('sss',process.env.API);
-    	this.queryData = process.env.API + "printData?Data=" + this.$route.query.data;
+      console.log('route : ', this.$route);
+    	this.queryData = process.env.API + 
+                      "printData?Data=" + this.$route.query.data + 
+                      "&token=" + this.$route.query.token;
     },	  
 	  data () {
   		return {

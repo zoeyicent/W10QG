@@ -11,9 +11,11 @@
 								<div class="row">
 									<div class="col-2" />
 									<div class="col-7 text-center">
-										<svg id="logo" viewBox="50 10 513 513"
+										<!-- viewBox="50 10 513 513" WILEDI-->
+										<svg id="logo" 
+												viewBox="200 90 413 413"
 												style="enable-background:new 0 0 460 460; padding:5px 5px 5px 5px;"
-												xml:space="preserve" width="160px" height="160px"
+												xml:space="preserve" width="180px" height="200px"
 												v-html="logoVariable">
 										</svg>
 									</div>
@@ -173,7 +175,7 @@
 		data () {
 			return {
 				logos: Object.keys(logoData),
-				logo: 'Keytronic', // Keytronic, Digitalizer, Molectron, WilEdi
+				logo: 'SO', // Keytronic, Digitalizer, Molectron, WilEdi, SO
 				login: {
 					COMP: '',
 					USER: '',

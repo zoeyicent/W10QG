@@ -683,9 +683,8 @@ import { date } from 'quasar'
 							});
 			// console.log('printReport ', Hasil);
 
-			let routeData = router.resolve({name: 'report', query: {data: Hasil} });
+			let routeData = router.resolve({name: 'report', query: {data: Hasil.Data, token: Hasil.token} });
 			window.open(routeData.href, '_blank');
-
 
 			  // let blob = new Blob([Hasil.data], { type: 'application/pdf' })
 			  // let link = document.createElement('a')

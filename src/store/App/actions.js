@@ -6,7 +6,7 @@ export async function doAppLogin ({commit, rootState, state, dispatch }, {user, 
 }
 */
 
-import weApi from 'src/api'
+import soApi from 'src/api'
 // import router from 'src/router'
 
 export async function doAppLogin ({commit, state}, {comp, user, pass, keep}) {
@@ -31,7 +31,7 @@ export async function doAppLogin ({commit, state}, {comp, user, pass, keep}) {
 		}
 
         commit('setAppDefault', {});
-        const Hasil = await weApi.fnLoginData (params, '');   
+        const Hasil = await soApi.fnLoginData (params, '');   
         // console.log('doAppLogin - Hasil ',Hasil);
         if (Hasil.success) {
             localStorage.setItem(AppName+'-company',comp);
@@ -70,7 +70,7 @@ export async function doAppCheckLogin ({commit, state}) {
             params['Controller'] = 'cAUTH'; 
             params['Method'] = 'CheckLogin'; 
         
-        const Hasil = await weApi.fnRequestData (params, '');
+        const Hasil = await soApi.fnRequestData (params, '');
         // console.log('actions.doAppCheckLogin',Hasil)
         if (Hasil.success) {
         	flag = Hasil.success;
@@ -113,7 +113,7 @@ export async function doAppLogout ({commit, state}) {
         params['Controller'] = 'cAUTH'; 
         params['Method'] = 'Logout'; 
     
-    const Hasil = await weApi.fnRequestData (params, '');
+    const Hasil = await soApi.fnRequestData (params, '');
     // console.log('action doAppLogout', Hasil);
 
     localStorage.removeItem(AppName+'-token');
@@ -132,7 +132,7 @@ export async function doAppMenuTree ({commit, state}, formID) {
         params['Method'] = 'LoadUserTreeMenu';
         params['Username'] = localStorage.getItem(AppName+'-name');
 
-    const Data = await weApi.fnRequestData (params, '');
+    const Data = await soApi.fnRequestData (params, '');
     // console.log('action.doAppMenuTree', Data);
 
     if (Data.DataRute === undefined) {
@@ -275,7 +275,7 @@ export async function doAppCall ({commit, state}, {params, frmID, id}) {
     Hati-hati pakai v-if
     karena bisa mentrigger ini berubah!!!
 */
-    const Hasil = await weApi.fnRequestData (params, '');
+    const Hasil = await soApi.fnRequestData (params, '');
     return Hasil;
 
     // if(typeof(Hasil.success) != 'undefined') {
@@ -291,7 +291,7 @@ export async function doAppLoadGrid ({commit, state}, {params, frmID, id}) {
 	karena bisa mentrigger ini berubah!!!
 */
     // console.log('Action - params',params);
-    const Hasil = await weApi.fnRequestData (params, '');
+    const Hasil = await soApi.fnRequestData (params, '');
 
     if(typeof(Hasil.success) != 'undefined') {
         return Hasil;
@@ -379,7 +379,7 @@ export async function doAppLoadObject ({commit, state}, {frmID, frmObj, method})
         params['Controller'] = 'c' + frmID;
         params['Method'] = method;
 
-    const Hasil = await weApi.fnRequestData (params, '');
+    const Hasil = await soApi.fnRequestData (params, '');
     // console.log('Actions - doAppLoadObject', Hasil)
     commit('setAppForms_Data', {
             id: frmID, 
@@ -496,7 +496,7 @@ export async function doAppFillObject ({commit, state, dispatch}, {frmID, frmObj
         params['Method'] = method === '' ? 'FillForm' : method;
     // console.log('action - doAppFillObject - dataParams', dataParams)
     // console.log('action - doAppFillObject', params)
-    const Hasil = await weApi.fnRequestData (params, '');
+    const Hasil = await soApi.fnRequestData (params, '');
     
     if (!Hasil.success) {
         /*
@@ -531,7 +531,7 @@ export async function doAppSaveData ({commit, state}, {frmID, method, mode, data
         params['Controller'] = 'c' + frmID;
         params['Method'] = method === '' ? 'SaveData' : method;
 
-    const Hasil = await weApi.fnPostData (params, '');
+    const Hasil = await soApi.fnPostData (params, '');
     // console.log('Actions - doAppSaveData ', Hasil)
     return Hasil;
 
@@ -551,10 +551,10 @@ export async function doAppReport ({commit, state}, {frmID, method, frmParams, d
             params['frmParams'] = frmParams;        
         }
 
-    const Hasil = await weApi.fnPrintData (params);
+    const Hasil = await soApi.fnPrintData (params);
     return Hasil;
 
-    // const Hasil = await weApi.fnEncryptParam (params);
+    // const Hasil = await soApi.fnEncryptParam (params);
     // // console.log('Actions - doAppReport', Hasil)
     // return Hasil.Data;
 }  

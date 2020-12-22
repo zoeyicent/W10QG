@@ -51,6 +51,7 @@ Router.beforeEach((to, from, next) => {
         case 'subError401':
         case 'error401':
           next();
+          return;
           break;
         case 'report':
           next();

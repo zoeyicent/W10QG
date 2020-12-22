@@ -101,7 +101,7 @@ ada di masing masing module yang memanggil fnRequestData
 		
 		DataParms['AppCompanyCode'] = localStorage.getItem(AppName+'-company');
 		DataParms['AppUserName'] = localStorage.getItem(AppName+'-name');
-		DataParms['AppToken'] = localStorage.getItem(AppName+'-token');
+		// DataParms['AppToken'] = localStorage.getItem(AppName+'-token');
 		DataParms['AppDateInfo'] = localStorage.getItem(AppName+'-dateInfo');
 		DataParms['AppName'] = AppName;
 
@@ -142,7 +142,7 @@ ada di masing masing module yang memanggil fnPostData
 		
 		DataParms['AppCompanyCode'] = localStorage.getItem(AppName+'-company');
 		DataParms['AppUserName'] = localStorage.getItem(AppName+'-name');
-		DataParms['AppToken'] = localStorage.getItem(AppName+'-token');
+		// DataParms['AppToken'] = localStorage.getItem(AppName+'-token');
 		DataParms['AppDateInfo'] = localStorage.getItem(AppName+'-dateInfo');
 		DataParms['AppName'] = AppName;
 		
@@ -191,7 +191,7 @@ ada di masing masing module yang memanggil fnPrintData
 		
 		DataParms['AppCompanyCode'] = localStorage.getItem(AppName+'-company');
 		DataParms['AppUserName'] = localStorage.getItem(AppName+'-name');
-		DataParms['AppToken'] = localStorage.getItem(AppName+'-token');
+		DataParms['token'] = localStorage.getItem(AppName+'-token');
 		DataParms['AppDateInfo'] = localStorage.getItem(AppName+'-dateInfo');
 		DataParms['AppName'] = AppName;
 
@@ -199,7 +199,9 @@ ada di masing masing module yang memanggil fnPrintData
  		// console.log('api.fnPrintData - DataParms', DataParms);
 
 		var params = this.fnEncryptParam(DataParms); 
-    	return params.Data;
+			params['token'] = localStorage.getItem(AppName+'-token');
+    	// return params.Data;
+    	return params;
 
 	},
 
