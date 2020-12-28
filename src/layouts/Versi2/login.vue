@@ -115,6 +115,7 @@
 	import Vivus from 'vivus';
 	import { mapGetters } from 'vuex';
 	import weAuth from 'src/auth';
+	import { version } from '../../../package.json'
 
 	export default { 
 		name : 'PageIndex', 
@@ -130,7 +131,8 @@
 				return logoData[this.logo];
 			},			
 			copyright() { return this.getAppCopyright; },
-			version() { return this.getAppVersion; },
+			// version() { return this.getAppVersion; },
+			version() { return version; },
 			versionInfo () {
 				return versionInfo[this.version];
 			},

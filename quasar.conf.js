@@ -28,8 +28,8 @@ module.exports = function (ctx) {
 
       // publicPath: '/project01.wexits.com',
       // publicPath: '/toko.sistem-online.com',
-      // publicPath: '',
-      publicPath: ctx.dev ? '' : '/toko.sistem-online.com',
+      publicPath: '',
+      // publicPath: ctx.dev ? '' : '/toko.sistem-online.com',
       env: ctx.dev
         ? { // so on dev we'll have
           API: JSON.stringify('http://localhost:9991/')
@@ -39,7 +39,7 @@ module.exports = function (ctx) {
         }
         : { // and on build (production):
           // API: JSON.stringify('http://172.30.1.39:8099/a5framework/lar/api/') // ikut IP server untuk laravel 
-          API: JSON.stringify('http://backends.sistem-online.com/TOKO/public/index.php') // ikut IP server untuk laravel 
+          API: JSON.stringify('https://backends.sistem-online.com/TOKO/public/index.php') // ikut IP server untuk laravel 
           // API: JSON.stringify('http://laravel.wexits.com/toko/public/index.php/api/') // ikut IP server untuk laravel 
         },
         

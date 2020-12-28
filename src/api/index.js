@@ -116,6 +116,7 @@ ada di masing masing module yang memanggil fnRequestData
 		try {
         	// console.log('api.fnRequestData - params', params);		
 			const response = await axios.get(Address, { params: params} )	
+        	// console.log('api.fnRequestData', response);	
         	// console.log('api.fnRequestData', response.data);	
         	// console.log('api.fnRequestData', this.fnDecrypt(response.data));		
 			return this.fnDecrypt(response.data, '');
@@ -204,6 +205,10 @@ ada di masing masing module yang memanggil fnPrintData
     	return params;
 
 	},
+
+
+
+
 
 }
 

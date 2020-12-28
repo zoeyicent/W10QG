@@ -18,9 +18,13 @@
         <q-btn  round dense size="sm" icon="redo" color="secondary" class="q-mr-sm"
                 :disable="myGrid.Grid.Rows.current_page === myGrid.Grid.Rows.last_page ? true : false"
                 @click="NextPage()" />
-        <q-btn  round dense size="sm" 
+        <q-btn  round dense size="sm" class="q-mr-sm"
                 icon="settings" color="secondary" 
                 @click="frmSetting=!frmSetting" />
+
+        <q-btn  round dense size="sm" 
+                icon="save_alt" color="secondary" 
+                @click="ExportToExcel"  />
 
     		<q-modal v-model="frmSetting" position="top">
               <GridSetting 
@@ -63,6 +67,9 @@
           path: this.subFrmID+'Grid.Pagination.page',
           data: (currentPage) >= lastPage ? lastPage : (currentPage+1) });
         this.myGrid.Grid.LoadDataGrid();
+      },
+      ExportToExcel() {
+        this.myGrid.Grid.ExportToExcel();
       },
       PreviousPage() {
         var currentPage = this.myGrid.Grid.Rows.current_page;

@@ -208,6 +208,12 @@
 				path:sF+'Grid.LoadDataGrid',
 				data: this.LoadDataGrid});
 
+			this.setAppForms_Data({
+				id: this.frmID,
+				path:sF+'Grid.ExportToExcel',
+				data: this.ExportToExcel});
+
+
 			if (this.frmType != "popup") {
 				this.LoadDataGrid();
 			}
@@ -273,7 +279,7 @@
 		},	
 		methods: {	
 			...mapMutations('App',['setAppForms_Data']),
-			...mapActions('App',['doAppLoadGrid']),
+			...mapActions('App',['doAppLoadGrid','doAppExportToExcel']),
 			onResize(size){
 				// console.log('onResize', this);
 				// console.log('"Grid" onResizeWindow - size', size);
@@ -306,6 +312,41 @@
 			},	
 			onResizeEle(size){
 				// console.log('"Grid" onResizeElement - size', size);
+			},					
+		    async ExportToExcel() {
+				
+		    	var Saya = this;
+				var params = new Object;
+					params['Controller'] = 'c' + this.frmID;
+					params['Method'] = 'LoadGrid';
+					params['ETE'] = true;
+					params['page'] = this.myGrid.Grid.Pagination.page;
+					params['perPage'] = this.myGrid.Grid.Pagination.rowsPerPage;
+					params['cari'] = this.myGrid.Grid.Filter === undefined ? [] : 
+									 this.myGrid.Grid.Filter.filter(r => r.filterValue != '');
+					params['urut'] = this.myGrid.Grid.Sort;
+					params['AllColumns'] = this.myGrid.Grid.SearchAllColumns;
+
+				var LoadingTitle = "Exporting, Please Wait...";
+
+				await weAuth.loading.loadData( this , LoadingTitle, '', '', 
+					async () => {
+						this.loading = true;
+						await this.doAppExportToExcel({ 
+									params: params, 
+									frmID: Saya.frmID, 
+									id: Saya.subForm+'Grid'
+								}).then( function(response) {
+										Saya.loading = false;
+										weAuth.extportToExcel({path : response});
+								}).catch( function(response) {
+										Saya.loading = false;
+										Saya.$q.notify('Fail exporting grid...' + response);
+								});
+
+					}
+				);				
+
 			},					
 		    async LoadDataGrid(event) {
 		    	var Saya = this;
@@ -366,6 +407,7 @@
 											}
 										}
 								}).catch( function(response) {
+										Saya.loading = false;
 										Saya.$q.notify('Fail loading grid...' + response);
 								});
 

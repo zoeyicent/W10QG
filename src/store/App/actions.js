@@ -558,3 +558,21 @@ export async function doAppReport ({commit, state}, {frmID, method, frmParams, d
     // // console.log('Actions - doAppReport', Hasil)
     // return Hasil.Data;
 }  
+
+
+
+export async function doAppExportToExcel ({commit, state}, {params, frmID, id}) {
+/*
+    Hati-hati pakai v-if
+    karena bisa mentrigger ini berubah!!!
+*/
+    console.log('Action - ExportToExcel - params',params);
+    const Hasil = await soApi.fnRequestData (params, '');
+
+    return soApi.fnEncrypt(JSON.stringify(Hasil));
+    // console.log('Action - frmID',frmID);
+    // console.log('Action - id',id);
+    // console.log('Action - doAppLoadGrid',Hasil);
+
+
+}

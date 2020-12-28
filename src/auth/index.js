@@ -705,6 +705,17 @@ import { date } from 'quasar'
 
 		},
 
+		async extportToExcel({path}) {
+
+			console.log('xxx',path);
+			// let routeData = router.resolve({name: 'report', query: {data: Hasil.Data, token: Hasil.token} });
+			let routeData = process.env.API + 'exporttoexcel?kunci='+path;
+			console.log('xxx',routeData);
+			window.open(routeData, '_blank');
+
+
+		},
+
 	}
 
 	// export default auth;

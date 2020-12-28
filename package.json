@@ -1,10 +1,10 @@
 {
-  "name": "q01",
-  "version": "0.0.1",
-  "description": "q01",
-  "productName": "q01",
+  "name": "Aplikasi Sistem Online",
+  "version": "0.1",
+  "description": "Aplikasi Penjualan",
+  "productName": "Aplikasi Toko",
   "cordovaId": "org.cordova.quasar.app",
-  "author": "q01",
+  "author": "wilianto.chen",
   "private": true,
   "scripts": {
     "test": "echo \"No test specified\" && exit 0"
