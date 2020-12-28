@@ -73,10 +73,36 @@ export default {
 		return ObjParms;
 	},
 
+	fnFormatDate(d, f) {
+		var dformat = "";
+        switch(f) {
+        	case "YYYYMMDDHHMMSS":
+				dformat =
+				  d.getFullYear() + ""+
+				  ("00" + (d.getMonth() + 1)).slice(-2) + "" +
+				  ("00" + d.getDate()).slice(-2) + "" +
+				  "" +
+				  ("00" + d.getHours()).slice(-2) + "" +
+				  ("00" + d.getMinutes()).slice(-2) + "" +
+				  ("00" + d.getSeconds()).slice(-2);
+        		break;
+        	default:
+				dformat =
+				  d.getFullYear() + ""+
+				  ("00" + (d.getMonth() + 1)).slice(-2) + "" +
+				  ("00" + d.getDate()).slice(-2) + "" 
+        		break;
+        }
+        return dformat;
+
+	},
+
 	async fnLoginData (DataParms, UserName) {
 		// console.log('api.fnLoginData', DataParms);
 		// var params = DataParms; 
+		DataParms['AppKey'] = this.fnFormatDate(new Date(), "YYYYMMDDHHMMSS");
 		var params = this.fnEncryptParam(DataParms); 
+		// var params = DataParms; 
         var Address = process.env.API + 'login';
 		try {
 			const response = await axios.post(Address, { params: params, withCredentials: true,} );
@@ -104,6 +130,7 @@ ada di masing masing module yang memanggil fnRequestData
 		// DataParms['AppToken'] = localStorage.getItem(AppName+'-token');
 		DataParms['AppDateInfo'] = localStorage.getItem(AppName+'-dateInfo');
 		DataParms['AppName'] = AppName;
+		DataParms['AppKey'] = this.fnFormatDate(new Date(), "YYYYMMDDHHMMSS");
 
  		// console.log('api.fnRequestData - token', localStorage.getItem(AppName+'-token'));
  		// console.log('api.fnRequestData - DataParms', DataParms);
@@ -146,6 +173,7 @@ ada di masing masing module yang memanggil fnPostData
 		// DataParms['AppToken'] = localStorage.getItem(AppName+'-token');
 		DataParms['AppDateInfo'] = localStorage.getItem(AppName+'-dateInfo');
 		DataParms['AppName'] = AppName;
+		DataParms['AppKey'] = this.fnFormatDate(new Date(), "YYYYMMDDHHMMSS");
 		
         var params = this.fnEncryptParam(DataParms); 
         var Address = process.env.API + 'postData';
@@ -195,6 +223,7 @@ ada di masing masing module yang memanggil fnPrintData
 		DataParms['token'] = localStorage.getItem(AppName+'-token');
 		DataParms['AppDateInfo'] = localStorage.getItem(AppName+'-dateInfo');
 		DataParms['AppName'] = AppName;
+		DataParms['AppKey'] = this.fnFormatDate(new Date(), "YYYYMMDDHHMMSS");
 
  		// console.log('api.fnPrintData - token', localStorage.getItem(AppName+'-token'));
  		// console.log('api.fnPrintData - DataParms', DataParms);
